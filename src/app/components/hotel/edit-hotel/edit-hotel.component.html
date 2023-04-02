@@ -1,0 +1,60 @@
+<h2 mat-dialog-tile> {{ title }} </h2>
+
+<mat-dialog-content [formGroup]="formHotel">
+        <div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Hotel name</mat-label>
+              <input matInput
+                    placeholder="Hotel name"
+                    formControlName="name"
+                    readonly="true">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Created At</mat-label>
+              <input matInput [matDatepicker]="picker3" formControlName="createdAt" readonly="true">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker3" disabled=""></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Hotel price</mat-label>
+              <input matInput
+                    type="number"
+                    placeholder="Price"
+                    formControlName="price"
+                    required>
+              <mat-error *ngIf="formHotel.get('price')?.invalid || formHotel.get('price')?.dirty || formHotel.get('price')?.touched">Enter hotel price</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Seasonal Open From</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="seasonal_open_from">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="formHotel.get('seasonal_open_from')?.invalid || formHotel.get('seasonal_open_from')?.dirty || formHotel.get('seasonal_open_from')?.touched">Choose valid seasonal open from</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Seasonal Open To</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="seasonal_open_to">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-error *ngIf="formHotel.get('seasonal_open_to')?.invalid || formHotel.get('seasonal_open_to')?.dirty || formHotel.get('seasonal_open_to')?.touched">Choose valid seasonal to</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close (click)="cancelRegistration()">Cancel</button>
+  <button mat-raised-button color="primary" mat-dialog-close (click)="editHotel()" [disabled]="formHotel.invalid"> Update </button>
+</div>
